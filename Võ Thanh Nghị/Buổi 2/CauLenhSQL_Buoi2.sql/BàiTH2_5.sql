@@ -1,4 +1,19 @@
-﻿INSERT INTO NHANVIEN (MaNV, HoNV, TenLot, TenNV, NgSinh, DiaChi, Phai, Luong, Phong) 
+﻿INSERT INTO PHONGBAN (MaPhg, TenPhg)
+VALUES ('1', 'Quản lý'),
+       ('4', 'Điều hành'),
+       ('5', 'Nghiên cứu');
+
+/**************************************************************************************/
+INSERT INTO DEAN (MaDA, TenDA, DDiemDA)
+VALUES
+    ('1', 'Nâng cao chất lượng muối', 'Sa Huỳnh'),
+    ('10', 'Xây dựng nhà máy chế biến thủy sản', 'Dung Quất'),
+    ('2', 'Phát triển hạ tầng mạng', 'Tp Quảng Ngãi'),
+    ('20', 'Truyền tải cáp quang', 'Tp Quảng Ngãi'),
+    ('3', 'Tin học hóa trường học', 'Ba Tơ'),
+    ('30', 'Đào tạo nhân lực', 'Tịnh Phong');
+/**************************************************************************************/
+INSERT INTO NHANVIEN (MaNV, HoNV, TenLot, TenNV, NgSinh, DiaChi, Phai, Luong, Phong) 
 VALUES ('123', 'Đinh', 'Bá', 'Tiến', '1982-02-27', 'Mộ Đức', 'Nam', NULL, '4'), 
        ('234', 'Nguyễn', 'Thanh', 'Tùng', '1956-08-12', 'Sơn Tịnh', 'Nam', NULL, '5'), 
        ('345', 'Bùi', 'Thúy', 'Vũ', NULL, 'Tư Nghĩa', 'Nữ', NULL, '4'), 
@@ -10,21 +25,6 @@ VALUES ('123', 'Đinh', 'Bá', 'Tiến', '1982-02-27', 'Mộ Đức', 'Nam', NUL
        ('901', 'Vương', 'Ngọc', 'Quyền', '1980-12-12', 'Mộ Đức', 'Nam', NULL, '1');
 
 /**************************************************************************************/
-INSERT INTO PHONGBAN (MaPhg, TenPhg)
-VALUES ('1', 'Quản lý'),
-       ('4', 'Điều hành'),
-       ('5', 'Nghiên cứu');
-/**************************************************************************************/
-INSERT INTO DEAN (MaDA, TenDA, DDiemDA)
-VALUES
-    ('1', 'Nâng cao chất lượng muối', 'Sa Huỳnh'),
-    ('10', 'Xây dựng nhà máy chế biến thủy sản', 'Dung Quất'),
-    ('2', 'Phát triển hạ tầng mạng', 'Tp Quảng Ngãi'),
-    ('20', 'Truyền tải cáp quang', 'Tp Quảng Ngãi'),
-    ('3', 'Tin học hóa trường học', 'Ba Tơ'),
-    ('30', 'Đào tạo nhân lực', 'Tịnh Phong');
-/**************************************************************************************/
-
 INSERT INTO PHANCONG (MaNV, MaDA, ThoiGian)
 VALUES 
 ('123', '1', '33'),
