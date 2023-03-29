@@ -94,9 +94,44 @@
 	SELECT SUM(soluongX*giaban) as N'Tổng tiền xuất'
 	FROM Xuat x
 	INNER JOIN Sanpham sp on sp.masp = x.masp
-	WHERE DAY(x.ngayxuat) = 2 AND MONTH(x.ngayxuat) = 9 AND YEAR(x.ngayxuat) = 2018
+	WHERE x.ngayxuat = '2018-09-02'
 */ 
 
-	SELECT MAX(tiennhap = soluongN*dongiaN), sohdn, ngaynhap
+/* Câu 13
+	SELECT TOP 1 tiennhap = soluongN*dongiaN, sohdn, ngaynhap
 	FROM Nhap np
 	WHERE YEAR(np.ngaynhap) = 2018
+	ORDER BY tiennhap DESC
+*/
+
+/* Cấu 14
+	SELECT TOP 10  mahangsx, tensp, soluongN
+	FROM Sanpham sp
+	INNER JOIN Nhap np on sp.masp = np.masp
+	ORDER BY soluongN DESC
+ */
+
+/* Câu 15
+	SELECT sp.masp, sp.tensp
+	FROM Sanpham sp
+	INNER JOIN Hangsx sx on sx.mahangsx = sp.mahangsx
+	INNER JOIN Nhap np on np.masp = sp.masp
+	INNER JOIN Nhanvien nv on nv.manv = np.manv
+	WHERE sx.tenhang = 'Samsung' AND nv.manv = 'NV01'
+*/ 
+
+/* Câu 16
+	SELECT np.sohdn, sp.masp, np.soluongN, np.ngaynhap
+	FROM Nhap np
+	INNER JOIN Sanpham sp on sp.masp = np.masp
+	INNER JOIN Xuat x on x.masp = sp.masp
+	INNER JOIN Nhanvien nv on nv.manv = x.manv
+	WHERE sp.masp = 'SP05' AND nv.manv = 'NV01'
+*/ 
+
+/* Câu 17
+	SELECT nv.manv, nv.tennv
+	FROM Nhanvien nv
+	INNER JOIN Xuat x on x.manv = nv.manv
+	WHERE x.masp = 'SP02' AND x.ngayxuat = '2020-02-03'
+*/
