@@ -1,0 +1,14 @@
+/* Câu 1
+	SELECT hsx.tenhang, COUNT(sp.masp) AS N'SoLoaiSP'
+	FROM Sanpham sp
+	INNER JOIN Hangsx hsx ON sp.mahangsx = hsx.mahangsx
+	GROUP BY hsx.tenhang
+*/
+
+/* Câu 2
+	SELECT sp.masp, sp.tensp, SUM(np.soluongN * np.dongiaN) AS tongtien
+	FROM Nhap np
+	INNER JOIN Sanpham sp ON np.masp = sp.masp
+	WHERE YEAR(np.ngaynhap) = 2018
+	GROUP BY sp.masp, sp.tensp
+*/
