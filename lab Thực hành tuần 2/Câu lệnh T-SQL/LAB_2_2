@@ -12,3 +12,82 @@
 	WHERE YEAR(np.ngaynhap) = 2018
 	GROUP BY sp.masp, sp.tensp
 */
+
+/* Câu 3
+	SELECT sp.masp, sp.tensp, SUM(x.soluongX) AS TongSoLuongXuat
+	FROM SanPham sp
+	INNER JOIN Xuat x ON sp.masp = x.masp
+	INNER JOIN Hangsx hsx ON sp.mahangsx = hsx.mahangsx
+	WHERE YEAR(x.ngayxuat) = 2018 AND hsx.tenhang = 'Samsung'
+	GROUP BY sp.masp, sp.tensp
+	HAVING SUM(Xuat.soluongX) > 10000
+	ORDER BY TongSoLuongXuat DESC
+*/
+
+/* Câu 4
+
+	SELECT phong, COUNT(*) AS soluong_nam
+	FROM NhanVien 
+	WHERE gioitinh = N'Nam'
+	GROUP BY phong
+*/
+
+/* Câu 5
+
+	SELECT hsx.tenhang, SUM(np.soluongN) AS tong_soluong_nhap
+	FROM Hangsx hsx JOIN Sanpham sp ON hsx.mahangsx = sp.mahangsx
+		     JOIN Nhap np ON sp.masp = np.masp
+	WHERE YEAR(np.ngaynhap) = 2018
+	GROUP BY hsx.tenhang
+*/
+
+
+/* Câu 6
+
+	SELECT nv.manv, nv.tennv, SUM(soluongX * giaban) AS tong_tien_xuat
+	FROM Xuat x
+	JOIN SanPham sp ON x.masp = sp.masp
+	JOIN NhanVien nv ON x.manv = nv.manv
+	WHERE YEAR(ngayxuat) = 2018
+	GROUP BY nv.manv, nv.tennv
+*/
+
+/* Câu 7
+
+	SELECT manv, SUM(soluongN*dongiaN) as TongTienNhap
+	FROM Nhap 
+	WHERE MONTH(ngaynhap) = 8 AND YEAR(ngaynhap) = 2018
+	GROUP BY manv
+	HAVING SUM(soluongN*dongiaN) > 100000
+*/
+
+/* Câu 8
+	SELECT *
+	FROM SanPham
+	WHERE masp NOT IN (
+	  SELECT masp
+	  FROM Xuat
+	)
+*/
+
+/* Câu 9
+	SELECT sp.*
+	FROM SanPham sp
+	INNER JOIN Xuat x ON sp.masp = x.masp
+	WHERE YEAR(sp.mota) = 2018 AND YEAR(x.ngayxuat) = 2018
+*/
+
+/* Câu 10
+	SELECT nv.tennv 
+	FROM Nhap np JOIN Xuat x ON np.manv = x.manv
+	JOIN Nhanvien nv ON n.manv = nv.manv
+	GROUP BY nv.manv, NV.tennv
+*/
+
+/* Câu 11
+	SELECT tennv
+	FROM Nhap np JOIN Xuat x ON np.manv = x.manv JOIN Nhanvien nv ON np.manv = nv.manv
+	WHERE np.manv NOT IN (SELECT DISTINCT manv FROM Nhap)
+	AND x.manv NOT IN (SELECT DISTINCT manv FROM Xuat)
+	GROUP BY nv.manv, NV.tennv
+*/
