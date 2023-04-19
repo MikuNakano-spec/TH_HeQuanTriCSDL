@@ -12,10 +12,10 @@ BEGIN
     IF (@flag = 0)
     BEGIN
         IF (@gioitinh <> 'Nam' AND @gioitinh <> 'Nữ')
-        BEGIN
-            SELECT 1 AS 'MaLoi' 
-            RETURN
-        END
+			BEGIN
+				SELECT 1 AS 'MaLoi' 
+				RETURN
+			END
         
         INSERT INTO Nhanvien (manv, tennv, gioitinh, diachi, sodt, email, phong)
         VALUES (@manv, @tennv, @gioitinh, @diachi, @sodt, @email, @phong)
@@ -27,10 +27,10 @@ BEGIN
     IF (@flag = 1) 
     BEGIN
         IF (@gioitinh <> 'Nam' AND @gioitinh <> 'Nữ')
-        BEGIN
-            SELECT 1 AS 'MaLoi'
-            RETURN
-        END
+			BEGIN
+				SELECT 1 AS 'MaLoi'
+				RETURN
+			END
         
         UPDATE Nhanvien 
         SET tennv = @tennv, 
@@ -61,16 +61,16 @@ BEGIN
     IF (@flag = 0) 
     BEGIN
         IF NOT EXISTS (SELECT * FROM Hangsx WHERE tenhang = @tenhang)
-        BEGIN
-            SELECT 1 AS 'MaLoi'
-            RETURN
-        END
+			BEGIN
+				SELECT 1 AS 'MaLoi'
+				RETURN
+			END
         
         IF (@soluong < 0)
-        BEGIN
-            SELECT 2 AS 'MaLoi' 
-            RETURN
-        END
+			BEGIN
+				SELECT 2 AS 'MaLoi' 
+				RETURN
+			END
 
         INSERT INTO Sanpham (masp, mahangsx, tensp, soluong, mausac, giaban, donvitinh, mota)
         VALUES (@masp, (SELECT mahangsx FROM Hangsx WHERE tenhang = @tenhang), @tensp, @soluong, @mausac, @giaban, @donvitinh, @mota)
@@ -82,16 +82,16 @@ BEGIN
     IF (@flag = 1)
     BEGIN
         IF NOT EXISTS (SELECT * FROM Hangsx WHERE tenhang = @tenhang)
-        BEGIN
-            SELECT 1 AS 'MaLoi'
-            RETURN
-        END
+			BEGIN
+				SELECT 1 AS 'MaLoi'
+				RETURN
+			END
         
         IF (@soluong < 0)
-        BEGIN
-            SELECT 2 AS 'MaLoi' 
-            RETURN
-        END
+			BEGIN
+				SELECT 2 AS 'MaLoi' 
+				RETURN
+			END
         
         UPDATE Sanpham 
         SET mahangsx = (SELECT mahangsx FROM Hangsx WHERE tenhang = @tenhang), 
@@ -113,10 +113,10 @@ CREATE PROCEDURE lab8_cau3
 AS
 BEGIN
     IF NOT EXISTS (SELECT * FROM Nhanvien WHERE manv = @manv)
-    BEGIN
-        SELECT 1 AS 'MaLoi' 
-        RETURN
-    END
+		BEGIN
+			SELECT 1 AS 'MaLoi' 
+			RETURN
+		END
 
     BEGIN TRANSACTION 
 
@@ -127,11 +127,11 @@ BEGIN
     DELETE FROM Nhanvien WHERE manv = @manv
 
     IF @@ERROR <> 0 
-    BEGIN
-        ROLLBACK
-        SELECT 1 AS 'MaLoi' 
-        RETURN
-    END
+		BEGIN
+			ROLLBACK
+			SELECT 1 AS 'MaLoi' 
+			RETURN
+		END
 
     COMMIT 
     SELECT 0 AS 'MaLoi' 
@@ -142,10 +142,10 @@ CREATE PROCEDURE lab8_cau4
 AS
 BEGIN
     IF NOT EXISTS (SELECT * FROM Sanpham WHERE masp = @masp)
-    BEGIN
-        SELECT 1 AS 'MaLoi' 
-        RETURN
-    END
+		BEGIN
+			SELECT 1 AS 'MaLoi' 
+			RETURN
+		END
 
     BEGIN TRANSACTION 
 
@@ -175,19 +175,19 @@ CREATE PROCEDURE lab8_cau5
 AS
 BEGIN
 	IF NOT EXISTS (SELECT * FROM Hangsx where tenhang = @tenhang)
-	BEGIN
-		SELECT 0 AS 'MaLoi'
-		RETURN;
-	END
+		BEGIN
+			SELECT 0 AS 'MaLoi'
+			RETURN;
+		END
 
 	INSERT INTO Hangsx (mahangsx, tenhang, diachi, sodt, email)
 	VALUES (@mahangsx, @tenhang, @diachi, @sodt, @email);
 
 	IF EXISTS (SELECT * FROM Hangsx where tenhang = @tenhang)
-	BEGIN
-		SELECT 1 AS 'MaLoi'
-		RETURN
-	END
+		BEGIN
+			SELECT 1 AS 'MaLoi'
+			RETURN
+		END
 END
 
 CREATE PROCEDURE lab8_cau6
@@ -200,16 +200,16 @@ CREATE PROCEDURE lab8_cau6
 AS
 BEGIN
 	 IF NOT EXISTS (SELECT * FROM Sanpham WHERE masp = @masp)
-	 BEGIN
-		SELECT 1 AS 'MaLoi'
-		RETURN;
-	END	
+		 BEGIN
+			SELECT 1 AS 'MaLoi'
+			RETURN;
+		END	
 
 	 IF NOT EXISTS (SELECT * FROM Nhanvien WHERE manv = @manv)
-	 BEGIN
-		SELECT 2 AS 'MaLoi'
-		RETURN;
-	END	
+		 BEGIN
+			SELECT 2 AS 'MaLoi'
+			RETURN;
+		END	
 
 	IF EXISTS (SELECT 1 FROM Nhap WHERE sohdn = @sohdn)
         UPDATE Nhap
@@ -239,44 +239,40 @@ BEGIN
 
     
     IF NOT EXISTS(SELECT * FROM Sanpham WHERE masp = @masp)
-    BEGIN
-        SELECT 1 AS 'MaLoi' 
-        RETURN;
-    END
+		BEGIN
+			SELECT 1 AS 'MaLoi' 
+			RETURN;
+		END
 
-   
     IF NOT EXISTS(SELECT * FROM Nhanvien WHERE manv = @manv)
-    BEGIN
-        SELECT 2 AS 'MaLoi'
-        RETURN;
-    END
-
-    
+		BEGIN
+			SELECT 2 AS 'MaLoi'
+			RETURN;
+		END
+ 
     IF @soluongX > (SELECT SoLuong FROM Sanpham WHERE masp = @masp)
-    BEGIN
-        SELECT 3 AS 'MaLoi'
-        RETURN;
-    END
-
+		BEGIN
+			SELECT 3 AS 'MaLoi'
+			RETURN;
+		END
 
     IF EXISTS(SELECT * FROM Xuat WHERE sohdx = @sohdx)
-    BEGIN
+		BEGIN
       
-        UPDATE Xuat 
-        SET masp = @masp, 
-            manv = @manv, 
-            ngayxuat = @ngayxuat, 
-            soluongX = @soluongX 
-        WHERE sohdx = @sohdx;
-    END
+			UPDATE Xuat 
+			SET masp = @masp, 
+				manv = @manv, 
+				ngayxuat = @ngayxuat, 
+				soluongX = @soluongX 
+			WHERE sohdx = @sohdx;
+		END
     ELSE
-    BEGIN
+		BEGIN
       
-        INSERT INTO Xuat (sohdx, masp, manv, ngayxuat, soluongX) 
-        VALUES (@sohdx, @masp, @manv, @ngayxuat, @soluongX);
-    END
+			INSERT INTO Xuat (sohdx, masp, manv, ngayxuat, soluongX) 
+			VALUES (@sohdx, @masp, @manv, @ngayxuat, @soluongX);
+		END
 
-    
-    SELECT 0 AS 'MaLoi'
-	RETURN
+		SELECT 0 AS 'MaLoi'
+		RETURN
 END
