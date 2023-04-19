@@ -41,7 +41,7 @@ AS
 BEGIN
     DECLARE @masp nvarchar(10), @manv nvarchar(10)
     DECLARE @slx int, @dgb float
-    SELECT @masp = masp, @manv = manv, @slx = soluongX, @dgb = dongiaX FROM inserted
+    SELECT @masp = masp, @manv = manv, @slx = soluongX FROM inserted
     IF NOT EXISTS (SELECT * FROM SanPham WHERE masp = @masp)
     BEGIN
         RAISERROR(N'Sản phẩm không tồn tại trong danh mục sản phẩm.', 16, 1)
